@@ -1,0 +1,172 @@
+:root {
+  --bg: #fefdfd;
+  --card: #ffffff;
+  --text: #3b3a36;
+  --muted: #1b1a18;
+  --border: #3b3630;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* INTRO */
+#intro {
+  height: 100vh;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.typing {
+  font-size: 1.6rem;
+}
+
+.cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.hidden {
+  display: none;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  padding: 5rem 1.5rem;
+  text-align: center;
+  animation: fadeUp 1s ease;
+}
+.illustration img {
+  width: 180px;
+  opacity: 0.9;
+}
+
+.illustration svg {
+  width: 180px;
+  stroke: var(--text);
+  fill: none;
+  stroke-width: 2;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+}
+
+.tagline {
+  margin-top: 0.5rem;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  background: #f7f5f2;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  margin: 0.3rem;
+  transition: transform 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.outline {
+  background: transparent;
+}
+
+/* SECTIONS */
+.section {
+  max-width: 900px;
+  margin: auto;
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.section h2 {
+  margin-bottom: 1.5rem;
+}
+
+/* CARDS */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: left;
+}
+
+/* TAGS */
+.tags span {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  margin: 0.3rem;
+  border-radius: 999px;
+  background: #e6e0e1;
+  font-size: 0.85rem;
+}
+
+/* PROJECTS */
+.project {
+  margin-bottom: 1.5rem;
+}
+
+.project a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* CONTACT */
+.contact-form {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
