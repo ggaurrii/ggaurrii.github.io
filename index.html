@@ -3,145 +3,476 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GAURI SHARMA | Portfolio</title>
+  <title>Gauri Sharma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Syne:wght@400;500;600;700&family=Syne+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf9f7;
+      --bg2: #f2f0ec;
+      --text: #1a1916;
+      --muted: #888480;
+      --accent: #c96b3a;
+      --accent-light: #fdf0e8;
+      --border: #e4e0da;
+      --card: #ffffff;
+    }
 
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* INTRO */
+    #intro {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 500;
+      transition: opacity 0.9s ease;
+    }
+    #intro.out { opacity: 0; pointer-events: none; }
+
+    .intro-content { text-align: center; }
+    .intro-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 8vw, 6rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .intro-name span { display: inline-block; animation: slideUp 0.7s cubic-bezier(0.16,1,0.3,1) both; }
+    .intro-name .w2 { animation-delay: 0.15s; font-style: italic; color: var(--accent); }
+    .intro-line { width: 0; height: 1px; background: var(--accent); margin: 1.2rem auto; animation: lineGrow 0.6s ease 0.7s forwards; }
+    .intro-role { font-family: 'Syne Mono', monospace; font-size: 0.75rem; letter-spacing: 0.25em; color: var(--muted); text-transform: uppercase; opacity: 0; animation: fadeIn 0.5s ease 1.1s forwards; }
+    @keyframes slideUp { from { transform: translateY(60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes lineGrow { to { width: 80px; } }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    /* MAIN */
+    #main { display: none; }
+    #main.show { display: block; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.8rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(250,249,247,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-color: var(--border); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+    .nav-logo em { color: var(--accent); font-style: italic; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; padding: 0 4rem;
+      display: flex; align-items: center; position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px; opacity: 0.35; pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr auto; gap: 6rem; align-items: center; position: relative; z-index: 1;
+    }
+    .hero-label { font-family: 'Syne Mono', monospace; font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+    .hero-label::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--accent); }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 7vw, 6.5rem); font-weight: 400; line-height: 1.05; letter-spacing: -0.02em; animation: heroReveal 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
+    .hero h1 .italic { font-style: italic; color: var(--accent); }
+    .hero-sub { margin-top: 1.5rem; font-size: 1rem; color: var(--muted); line-height: 1.8; max-width: 480px; animation: heroReveal 0.9s cubic-bezier(0.16,1,0.3,1) 0.25s both; }
+    .hero-actions { margin-top: 3rem; display: flex; gap: 1rem; flex-wrap: wrap; animation: heroReveal 0.9s cubic-bezier(0.16,1,0.3,1) 0.4s both; }
+    @keyframes heroReveal { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+    .btn { display: inline-block; padding: 0.85rem 2rem; font-family: 'Syne', sans-serif; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 3px; transition: all 0.25s; cursor: pointer; border: none; }
+    .btn-filled { background: var(--text); color: var(--bg); }
+    .btn-filled:hover { background: var(--accent); }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--text); }
+
+    .hero-illustration { animation: heroReveal 1s cubic-bezier(0.16,1,0.3,1) 0.3s both; position: relative; }
+    .illus-frame { width: 280px; height: 340px; border-radius: 140px 140px 20px 20px; overflow: hidden; background: var(--bg2); border: 1px solid var(--border); position: relative; }
+    .illus-frame img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.85); }
+    .illus-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 5rem; color: var(--accent); font-style: italic; }
+    .illus-badge { position: absolute; bottom: -1rem; right: -1rem; background: var(--accent); color: white; font-family: 'Syne Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; padding: 0.6rem 1rem; border-radius: 4px; }
+
+    .hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; font-family: 'Syne Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; animation: fadeIn 1s ease 1s both; }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--muted), transparent); animation: scrollPulse 2s ease infinite; }
+    @keyframes scrollPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* SECTIONS */
+    .section { max-width: 1100px; margin: 0 auto; padding: 7rem 4rem; }
+    .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 4rem; }
+    .section-num { font-family: 'Syne Mono', monospace; font-size: 0.72rem; color: var(--accent); letter-spacing: 0.2em; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; letter-spacing: -0.02em; }
+    .section-title em { font-style: italic; color: var(--accent); }
+    .section-line { flex: 1; height: 1px; background: var(--border); margin-left: auto; }
+    .divider { max-width: 1100px; margin: 0 auto; padding: 0 4rem; border-top: 1px solid var(--border); }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: start; }
+    .about-text { font-size: 1.05rem; line-height: 1.9; color: var(--muted); }
+    .about-text strong { color: var(--text); font-weight: 600; }
+    .about-quote { margin-top: 2.5rem; padding: 1.5rem 0; border-top: 1px solid var(--border); }
+    .about-quote p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.15rem; line-height: 1.6; color: var(--text); }
+    .skill-block { margin-bottom: 2rem; }
+    .skill-block h4 { font-family: 'Syne Mono', monospace; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag { padding: 0.35rem 0.85rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 2px; font-size: 0.78rem; color: var(--text); transition: all 0.2s; cursor: default; }
+    .tag:hover { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+
+    /* EDUCATION */
+    .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 3rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start; transition: box-shadow 0.3s; }
+    .edu-card:hover { box-shadow: 0 8px 40px rgba(0,0,0,0.06); }
+    .edu-degree { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 0.4rem; }
+    .edu-uni { font-size: 0.85rem; color: var(--muted); margin-bottom: 2rem; }
+    .courses { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .course { padding: 0.3rem 0.75rem; background: var(--accent-light); color: var(--accent); border-radius: 2px; font-size: 0.75rem; }
+    .edu-years { text-align: right; }
+    .year-big { font-family: 'Playfair Display', serif; font-size: 3rem; font-style: italic; color: var(--border); line-height: 1; }
+    .year-range { font-family: 'Syne Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.15em; margin-top: 0.3rem; }
+
+    /* PROJECTS */
+    .projects-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .project-row { background: var(--card); padding: 2.5rem 3rem; display: grid; grid-template-columns: auto 1fr auto; gap: 3rem; align-items: center; text-decoration: none; color: var(--text); transition: background 0.2s; }
+    .project-row:hover { background: var(--accent-light); }
+    .project-row:hover .project-arrow { transform: translate(4px, -4px); color: var(--accent); }
+    .project-index { font-family: 'Syne Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.15em; min-width: 2rem; }
+    .project-main h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.4rem; }
+    .project-main p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .project-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.8rem; }
+    .project-tag { font-family: 'Syne Mono', monospace; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; }
+    .project-tag + .project-tag::before { content: '·'; margin-right: 0.4rem; }
+    .project-arrow { font-size: 1.2rem; color: var(--border); transition: all 0.25s; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; }
+    .contact-left h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 400; line-height: 1.4; margin-bottom: 1.5rem; }
+    .contact-left h3 em { font-style: italic; color: var(--accent); }
+    .contact-left p { font-size: 0.9rem; color: var(--muted); line-height: 1.9; margin-bottom: 2rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+    .contact-link { display: flex; align-items: center; gap: 1rem; color: var(--muted); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .contact-link:hover { color: var(--accent); }
+    .contact-link-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: background 0.2s; }
+    .contact-link:hover .contact-link-dot { background: var(--accent); }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-form input, .contact-form textarea { width: 100%; padding: 1rem 1.2rem; background: var(--card); border: 1px solid var(--border); border-radius: 4px; font-family: 'Syne', sans-serif; font-size: 0.85rem; color: var(--text); outline: none; transition: border-color 0.2s; resize: none; }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--muted); }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .btn-send { padding: 1rem 2rem; background: var(--text); color: var(--bg); border: none; border-radius: 4px; font-family: 'Syne', sans-serif; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.25s; align-self: flex-start; }
+    .btn-send:hover { background: var(--accent); }
+    .btn-send.sent { background: #4a9e6b; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 2.5rem 4rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-left { font-family: 'Playfair Display', serif; font-size: 1.1rem; }
+    .footer-left em { color: var(--accent); font-style: italic; }
+    footer p { font-size: 0.75rem; color: var(--muted); }
+    .footer-top { font-size: 0.75rem; color: var(--muted); text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s; }
+    .footer-top:hover { color: var(--accent); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 0 1.5rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; padding-top: 6rem; }
+      .hero-illustration { display: none; }
+      .section { padding: 5rem 1.5rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .project-row { grid-template-columns: 1fr; gap: 1rem; padding: 1.5rem; }
+      .project-index { display: none; }
+      .edu-card { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- INTRO -->
-<section id="intro">
-  <div class="typing">
-    &lt;Hi, I'm <span class="name">GAURI</span><span class="cursor">|</span>
+  <div id="intro">
+    <div class="intro-content">
+      <div class="intro-name">
+        <span class="w1">Gauri </span><span class="w2">Sharma</span>
+      </div>
+      <div class="intro-line"></div>
+      <p class="intro-role">Software Engineer</p>
+    </div>
   </div>
-</section>
 
-<!-- MAIN -->
-<main id="main" class="hidden">
+  <div id="main">
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="illustration">
-  <img src="assets/illustration.png" alt="Line art illustration">
-</div>
-
-      </svg>
-    </div>
-
-    <h1>GAURI SHARMA</h1>
-    <p class="tagline">A Software Engineer who builds and designs.</p>
-    <p class="subtitle">B.Tech Computer Science </p>
-
-    <div class="hero-buttons">
-      <a href="#projects" class="btn">View Projects</a>
-      <a href="#contact" class="btn">Contact Me</a>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="section" id="about">
-    <h2>About Me</h2>
-    <div class="card">
-      <p>
-        I am a Computer Science student with a strong foundation in programming,
-        data structures, and system-level thinking. I enjoy building clean,
-        reliable software and understanding how things work under the hood.
-        My interests include problem solving, backend systems, and applied AI.
-        I focus on writing maintainable code and learning through real projects.
-      </p>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section class="section" id="skills">
-    <h2>Skills</h2>
-
-    <div class="card">
-      <h3>Programming Languages</h3>
-      <div class="tags">
-        <span>C++</span>
-        <span>Python</span>
-        <span>JavaScript</span>
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>MySQL</span>
-      </div>
-
-      <h3>Frameworks & Tools</h3>
-      <div class="tags">
-        <span>Numpy</span>
-        <span>Pandas</span>
-        <span>Scikit-learn</span>
-        <span>Git & GitHub</span>
-        <span>Jupyter Notebook</span>
-        <span>MySQL</span>
-        <span>Linux</span>
-        <span>VS Code</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- EDUCATION -->
-  <section class="section" id="education">
-    <h2>Education</h2>
-    <div class="card">
-      <p><strong>B.Tech in Computer Science</strong></p>
-      <p>Banasthali University, India</p>
-      <p>2024 – 2028</p>
-
-      <h3>Relevant Coursework</h3>
-      <ul>
-        <li>Data Structures & Algorithms, Object-Oriented Programming,Design And Analytics of Algorithm,Operating Systems,Database Management Systems,Artificial Intelligence,Machine Learning</li>
-     
-
+    <nav id="nav">
+      <a href="#" class="nav-logo">Gauri <em>Sharma</em></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
-    </div>
-  </section>
+    </nav>
 
-  <!-- EXPERIENCE -->
+    <section class="hero" id="hero">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <p class="hero-label">Available for opportunities</p>
+          <h1>Software<br>Engineer &<br><span class="italic">Designer.</span></h1>
+          <p class="hero-sub">B.Tech Computer Science student at Banasthali University. I build clean, reliable software — from backend systems to applied AI.</p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-filled">View Projects</a>
+            <a href="#contact" class="btn btn-outline">Say Hello</a>
+          </div>
+        </div>
+        <div class="hero-illustration">
+          <div class="illus-frame">
+            <img src="assets/illustration.png" alt="Gauri" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="illus-placeholder" style="display:none;">GS</div>
+          </div>
+          <div class="illus-badge">B.Tech CSE · 2028</div>
+        </div>
+      </div>
+      <div class="hero-scroll">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
 
+    <div class="divider"></div>
 
-  <!-- PROJECTS -->
-  <section class="section" id="projects">
-    <h2>Projects</h2>
+    <section class="section reveal" id="about">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">About <em>Me</em></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p class="about-text">I'm a <strong>Computer Science student</strong> with a strong foundation in programming, data structures, and system-level thinking. I enjoy building clean, reliable software and understanding how things work under the hood.<br><br>My interests include <strong>problem solving</strong>, <strong>backend systems</strong>, and <strong>applied AI</strong>. I focus on writing maintainable code and learning through real projects.</p>
+          <div class="about-quote">
+            <p>"Building things that work beautifully — from the logic underneath to the experience on top."</p>
+          </div>
+        </div>
+        <div>
+          <div class="skill-block">
+            <h4>Languages</h4>
+            <div class="tags">
+              <span class="tag">C++</span><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">HTML / CSS</span><span class="tag">MySQL</span>
+            </div>
+          </div>
+          <div class="skill-block">
+            <h4>Frameworks & Tools</h4>
+            <div class="tags">
+              <span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">Scikit-learn</span><span class="tag">TensorFlow</span><span class="tag">Git</span><span class="tag">Jupyter</span><span class="tag">Linux</span>
+            </div>
+          </div>
+          <div class="skill-block">
+            <h4>Domains</h4>
+            <div class="tags">
+              <span class="tag">Machine Learning</span><span class="tag">NLP</span><span class="tag">Deep Learning</span><span class="tag">OOP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="card project">
-      <h3>Deep Song Writer</h3>
-      <p>Python, TensorFlow/PyTorch, NLP, CNN</p>
-      <a href="https://github.com/ggaurrii/deep-songwriter" target="_blank">View on GitHub →</a>
-    </div>
+    <div class="divider"></div>
 
-    <div class="card project">
-      <h3>Smart Resume Screening System</h3>
-      <p>Python, NLP, Machine Learning, Scikit-learn</p>
-      <a href="https://github.com/ggaurrii/Smart-Resume-Screening-System" target="_blank">View on GitHub →</a>
-    </div>
+    <section class="section reveal" id="education">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Edu<em>cation</em></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="edu-card">
+        <div>
+          <p class="edu-degree">B.Tech in Computer Science</p>
+          <p class="edu-uni">Banasthali Vidyapith · Rajasthan, India</p>
+          <div class="courses">
+            <span class="course">Data Structures & Algorithms</span>
+            <span class="course">OOP</span>
+            <span class="course">Design & Analysis of Algorithms</span>
+            <span class="course">Operating Systems</span>
+            <span class="course">DBMS</span>
+            <span class="course">Artificial Intelligence</span>
+            <span class="course">Machine Learning</span>
+          </div>
+        </div>
+        <div class="edu-years">
+          <div class="year-big">'28</div>
+          <div class="year-range">2024 — 2028</div>
+        </div>
+      </div>
+    </section>
 
-    <div class="card project">
-      <h3>Student Management System</h3>
-      <p>C++, Object-Oriented Programming,STL</p>
-      <a href="https://github.com/ggaurrii/student-management-system-cpp" target="_blank">View on GitHub →</a>
-    </div>
-  </section>
+    <div class="divider"></div>
 
-  <!-- CONTACT -->
-  <section class="section" id="contact">
-    <h2>Get In Touch!</h2>
+    <section class="section reveal" id="projects">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">Pro<em>jects</em></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="projects-list">
+        <a class="project-row" href="https://github.com/ggaurrii/deep-songwriter" target="_blank">
+          <span class="project-index">01</span>
+          <div class="project-main">
+            <h3>Deep Song Writer</h3>
+            <p>AI-powered song generation using deep learning and NLP to compose original lyrics with natural language patterns.</p>
+            <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">TensorFlow</span><span class="project-tag">NLP</span><span class="project-tag">CNN</span></div>
+          </div>
+          <span class="project-arrow">↗</span>
+        </a>
+        <a class="project-row" href="https://github.com/ggaurrii/Smart-Resume-Screening-System" target="_blank">
+          <span class="project-index">02</span>
+          <div class="project-main">
+            <h3>Smart Resume Screening</h3>
+            <p>Intelligent resume screening pipeline that automates candidate filtering using NLP and ML classification.</p>
+            <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Scikit-learn</span><span class="project-tag">NLP</span><span class="project-tag">ML</span></div>
+          </div>
+          <span class="project-arrow">↗</span>
+        </a>
+        <a class="project-row" href="https://github.com/ggaurrii/student-management-system-cpp" target="_blank">
+          <span class="project-index">03</span>
+          <div class="project-main">
+            <h3>Student Management System</h3>
+            <p>Full-featured C++ application for managing student records, built with OOP principles and the STL.</p>
+            <div class="project-tags"><span class="project-tag">C++</span><span class="project-tag">OOP</span><span class="project-tag">STL</span></div>
+          </div>
+          <span class="project-arrow">↗</span>
+        </a>
+      </div>
+    </section>
 
-    <form class="contact-form">
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea placeholder="Your Message" rows="4" required></textarea>
-      <button type="submit" class="btn">Send Message</button>
-    </form>
-  </section>
+    <div class="divider"></div>
 
-</main>
+    <section class="section reveal" id="contact">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2 class="section-title">Get in <em>Touch</em></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-left">
+          <h3>Let's build something <em>together.</em></h3>
+          <p>I'm open to internship opportunities, collaborations, and interesting projects. If you want to build something or just want to connect — I'd love to hear from you.</p>
+          <div class="contact-links">
+            <a href="https://github.com/ggaurrii" target="_blank" class="contact-link"><span class="contact-link-dot"></span> github.com/ggaurrii</a>
+            <a href="/cdn-cgi/l/email-protection#c3a4a2b6b1aa83a6bba2aeb3afa6eda0acae" class="contact-link"><span class="contact-link-dot"></span> <span class="__cf_email__" data-cfemail="91f6f0e4e3f8d1f4e9f0fce1fdf4bff2fefc">[email&#160;protected]</span></a>
+            <a href="https://linkedin.com" target="_blank" class="contact-link"><span class="contact-link-dot"></span> linkedin.com/in/gauri</a>
+          </div>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <input type="text" name="name" placeholder="Name" required />
+            <input type="email" name="email" placeholder="Email" required />
+          </div>
+          <textarea name="message" placeholder="Message" rows="5" required></textarea>
+          <button type="submit" class="btn-send" id="sendBtn">Send Message</button>
+          <p id="formStatus" style="font-size:0.78rem; margin-top:0.5rem; display:none;"></p>
+        </form>
+      </div>
+    </section>
 
-<script src="script.js"></script>
+    <footer>
+      <div class="footer-left">Gauri <em>Sharma</em></div>
+      <p>© 2025 · Designed & built with care.</p>
+      <a href="#hero" class="footer-top">↑ Top</a>
+    </footer>
+
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    window.addEventListener('load', () => {
+      const intro = document.getElementById('intro');
+      const main = document.getElementById('main');
+      setTimeout(() => {
+        intro.classList.add('out');
+        setTimeout(() => {
+          intro.style.display = 'none';
+          main.classList.add('show');
+          initReveal();
+        }, 900);
+      }, 2200);
+    });
+
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    function initReveal() {
+      const els = document.querySelectorAll('.reveal');
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+      }, { threshold: 0.1 });
+      els.forEach(el => obs.observe(el));
+    }
+
+    // -------------------------------------------------------
+    // PASTE YOUR FORMSPREE ENDPOINT BELOW
+    // Sign up free at https://formspree.io → New Form → copy the URL
+    const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';
+    // -------------------------------------------------------
+
+    document.getElementById('contactForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = document.getElementById('sendBtn');
+      const status = document.getElementById('formStatus');
+
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+      status.style.display = 'none';
+
+      try {
+        const res = await fetch(FORMSPREE_URL, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(e.target)
+        });
+        if (res.ok) {
+          btn.textContent = '✓ Message Sent!';
+          btn.classList.add('sent');
+          status.textContent = "Thanks! I'll get back to you soon.";
+          status.style.color = '#4a9e6b';
+          status.style.display = 'block';
+          e.target.reset();
+          setTimeout(() => {
+            btn.textContent = 'Send Message';
+            btn.classList.remove('sent');
+            btn.disabled = false;
+            status.style.display = 'none';
+          }, 4000);
+        } else {
+          throw new Error('failed');
+        }
+      } catch {
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+        status.textContent = 'Oops! Something went wrong. Please try again.';
+        status.style.color = '#c96b3a';
+        status.style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>
-
-
-
