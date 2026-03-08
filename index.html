@@ -28,7 +28,6 @@
       overflow-x: hidden;
     }
 
-    /* INTRO */
     #intro {
       position: fixed; inset: 0;
       background: var(--bg);
@@ -54,11 +53,9 @@
     @keyframes lineGrow { to { width: 80px; } }
     @keyframes fadeIn { to { opacity: 1; } }
 
-    /* MAIN */
     #main { display: none; }
     #main.show { display: block; }
 
-    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 1.8rem 4rem;
@@ -75,7 +72,6 @@
     .nav-links a { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
 
-    /* HERO */
     .hero {
       min-height: 100vh; padding: 0 4rem;
       display: flex; align-items: center; position: relative;
@@ -113,7 +109,6 @@
     .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--muted), transparent); animation: scrollPulse 2s ease infinite; }
     @keyframes scrollPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
-    /* SECTIONS */
     .section { max-width: 1100px; margin: 0 auto; padding: 7rem 4rem; }
     .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 4rem; }
     .section-num { font-family: 'Syne Mono', monospace; font-size: 0.72rem; color: var(--accent); letter-spacing: 0.2em; }
@@ -122,7 +117,6 @@
     .section-line { flex: 1; height: 1px; background: var(--border); margin-left: auto; }
     .divider { max-width: 1100px; margin: 0 auto; padding: 0 4rem; border-top: 1px solid var(--border); }
 
-    /* ABOUT */
     .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 5rem; align-items: start; }
     .about-text { font-size: 1.05rem; line-height: 1.9; color: var(--muted); }
     .about-text strong { color: var(--text); font-weight: 600; }
@@ -134,7 +128,6 @@
     .tag { padding: 0.35rem 0.85rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 2px; font-size: 0.78rem; color: var(--text); transition: all 0.2s; cursor: default; }
     .tag:hover { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
 
-    /* EDUCATION */
     .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 3rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start; transition: box-shadow 0.3s; }
     .edu-card:hover { box-shadow: 0 8px 40px rgba(0,0,0,0.06); }
     .edu-degree { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 0.4rem; }
@@ -145,7 +138,6 @@
     .year-big { font-family: 'Playfair Display', serif; font-size: 3rem; font-style: italic; color: var(--border); line-height: 1; }
     .year-range { font-family: 'Syne Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.15em; margin-top: 0.3rem; }
 
-    /* PROJECTS */
     .projects-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
     .project-row { background: var(--card); padding: 2.5rem 3rem; display: grid; grid-template-columns: auto 1fr auto; gap: 3rem; align-items: center; text-decoration: none; color: var(--text); transition: background 0.2s; }
     .project-row:hover { background: var(--accent-light); }
@@ -158,7 +150,6 @@
     .project-tag + .project-tag::before { content: '·'; margin-right: 0.4rem; }
     .project-arrow { font-size: 1.2rem; color: var(--border); transition: all 0.25s; }
 
-    /* CONTACT */
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; }
     .contact-left h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 400; line-height: 1.4; margin-bottom: 1.5rem; }
     .contact-left h3 em { font-style: italic; color: var(--accent); }
@@ -177,7 +168,6 @@
     .btn-send:hover { background: var(--accent); }
     .btn-send.sent { background: #4a9e6b; }
 
-    /* FOOTER */
     footer { border-top: 1px solid var(--border); padding: 2.5rem 4rem; display: flex; justify-content: space-between; align-items: center; }
     .footer-left { font-family: 'Playfair Display', serif; font-size: 1.1rem; }
     .footer-left em { color: var(--accent); font-style: italic; }
@@ -185,7 +175,6 @@
     .footer-top { font-size: 0.75rem; color: var(--muted); text-decoration: none; letter-spacing: 0.1em; transition: color 0.2s; }
     .footer-top:hover { color: var(--accent); }
 
-    /* REVEAL */
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.in { opacity: 1; transform: translateY(0); }
 
@@ -277,19 +266,32 @@
           <div class="skill-block">
             <h4>Languages</h4>
             <div class="tags">
-              <span class="tag">C++</span><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">HTML / CSS</span><span class="tag">MySQL</span>
+              <span class="tag">C++</span>
+              <span class="tag">Python</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">HTML / CSS</span>
+              <span class="tag">MySQL</span>
             </div>
           </div>
           <div class="skill-block">
             <h4>Frameworks & Tools</h4>
             <div class="tags">
-              <span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">Scikit-learn</span><span class="tag">TensorFlow</span><span class="tag">Git</span><span class="tag">Jupyter</span><span class="tag">Linux</span>
+              <span class="tag">NumPy</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">Scikit-learn</span>
+              <span class="tag">TensorFlow</span>
+              <span class="tag">Git</span>
+              <span class="tag">Jupyter</span>
+              <span class="tag">Linux</span>
             </div>
           </div>
           <div class="skill-block">
             <h4>Domains</h4>
             <div class="tags">
-              <span class="tag">Machine Learning</span><span class="tag">NLP</span><span class="tag">Deep Learning</span><span class="tag">OOP</span>
+              <span class="tag">Machine Learning</span>
+              <span class="tag">NLP</span>
+              <span class="tag">Deep Learning</span>
+              <span class="tag">OOP</span>
             </div>
           </div>
         </div>
@@ -327,6 +329,7 @@
 
     <div class="divider"></div>
 
+    <!-- PROJECTS — edit only between these comments -->
     <section class="section reveal" id="projects">
       <div class="section-header">
         <span class="section-num">03</span>
@@ -334,44 +337,71 @@
         <div class="section-line"></div>
       </div>
       <div class="projects-list">
-         <a class="project-row" href="https://github.com/ggaurrii/Smart-Resume-Screening-System" target="_blank">
+
+        <a class="project-row" href="https://github.com/ggaurrii" target="_blank">
           <span class="project-index">01</span>
           <div class="project-main">
-            <h3>Detecting AI-Generated Fraud content</h3>
-            <p>Developed a multi-modal AI fraud detection system that analyzes emails, URLs, files, audio, and prompt inputs to identify coordinated AI-generated fraud attacks in real time</p>
-            <div class="project-tags"><span class="project-tag">Next.js</span><span class="project-tag">FastAPI</span><span class="project-tag">MongoDB</span><span class="project-tag">Redis</span>><span class="project-tag">HuggingFace</span>><span class="project-tag">PyTorch</span></div>
+            <h3>Detecting AI-Generated Fraud Content</h3>
+            <p>A multi-modal AI fraud detection system that analyzes emails, URLs, files, audio, and prompt inputs to identify coordinated AI-generated fraud attacks in real time.</p>
+            <div class="project-tags">
+              <span class="project-tag">Next.js</span>
+              <span class="project-tag">FastAPI</span>
+              <span class="project-tag">MongoDB</span>
+              <span class="project-tag">Redis</span>
+              <span class="project-tag">HuggingFace</span>
+              <span class="project-tag">PyTorch</span>
+            </div>
           </div>
           <span class="project-arrow">↗</span>
         </a>
+
         <a class="project-row" href="https://github.com/ggaurrii/deep-songwriter" target="_blank">
           <span class="project-index">02</span>
           <div class="project-main">
             <h3>Deep Song Writer</h3>
             <p>AI-powered song generation using deep learning and NLP to compose original lyrics with natural language patterns.</p>
-            <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">TensorFlow</span><span class="project-tag">NLP</span><span class="project-tag">CNN</span></div>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">TensorFlow</span>
+              <span class="project-tag">NLP</span>
+              <span class="project-tag">CNN</span>
+            </div>
           </div>
           <span class="project-arrow">↗</span>
         </a>
+
         <a class="project-row" href="https://github.com/ggaurrii/Smart-Resume-Screening-System" target="_blank">
           <span class="project-index">03</span>
           <div class="project-main">
             <h3>Smart Resume Screening</h3>
             <p>Intelligent resume screening pipeline that automates candidate filtering using NLP and ML classification.</p>
-            <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Scikit-learn</span><span class="project-tag">NLP</span><span class="project-tag">ML</span></div>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Scikit-learn</span>
+              <span class="project-tag">NLP</span>
+              <span class="project-tag">ML</span>
+            </div>
           </div>
           <span class="project-arrow">↗</span>
         </a>
+
         <a class="project-row" href="https://github.com/ggaurrii/student-management-system-cpp" target="_blank">
           <span class="project-index">04</span>
           <div class="project-main">
             <h3>Student Management System</h3>
             <p>Full-featured C++ application for managing student records, built with OOP principles and the STL.</p>
-            <div class="project-tags"><span class="project-tag">C++</span><span class="project-tag">OOP</span><span class="project-tag">STL</span></div>
+            <div class="project-tags">
+              <span class="project-tag">C++</span>
+              <span class="project-tag">OOP</span>
+              <span class="project-tag">STL</span>
+            </div>
           </div>
           <span class="project-arrow">↗</span>
         </a>
+
       </div>
     </section>
+    <!-- END PROJECTS -->
 
     <div class="divider"></div>
 
@@ -388,7 +418,7 @@
           <div class="contact-links">
             <a href="https://github.com/ggaurrii" target="_blank" class="contact-link"><span class="contact-link-dot"></span> github.com/ggaurrii</a>
             <a href="mailto:gaurisharma2355@gmail.com" class="contact-link"><span class="contact-link-dot"></span> gaurisharma2355@gmail.com</a>
-            <a href="https://linkedin.com/in/gauri-sharma-693839325" target="_blank" class="contact-link"><span class="contact-link-dot"></span> linkedin.com/in/gauri</a>
+            <a href="https://linkedin.com/in/gauri-sharma-693839325" target="_blank" class="contact-link"><span class="contact-link-dot"></span> linkedin.com/in/gauri-sharma</a>
           </div>
         </div>
         <form class="contact-form" id="contactForm">
@@ -437,8 +467,8 @@
       els.forEach(el => obs.observe(el));
     }
 
+    // Replace YOUR_FORM_ID with your Formspree form ID
     const FORMSPREE_URL = 'https://formspree.io/f/xreybjrj';
-    
 
     document.getElementById('contactForm').addEventListener('submit', async e => {
       e.preventDefault();
@@ -482,6 +512,3 @@
   </script>
 </body>
 </html>
-
-
-
